@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Python version (local dev preference, not project requirement)
+.python-version
+
 # IDE
 .idea/
 .vscode/
