@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import time
 from typing import TYPE_CHECKING
@@ -166,8 +167,6 @@ class OllamaBackend(InferenceBackend):
                 if not line:
                     continue
 
-                import json
-
                 chunk = json.loads(line)
 
                 if chunk.get("response"):
@@ -226,8 +225,6 @@ class OllamaBackend(InferenceBackend):
             async for line in resp.aiter_lines():
                 if not line:
                     continue
-
-                import json
 
                 chunk = json.loads(line)
 

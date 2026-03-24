@@ -90,7 +90,7 @@ class BenchmarkRunner:
         model_id: str,
         prompts: list[PromptSpec],
         progress: Progress,
-        task_id,
+        task_id: int,
     ) -> BenchmarkResult:
         """Benchmark a single model on a single backend."""
         progress.update(
