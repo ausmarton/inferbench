@@ -1,0 +1,129 @@
+models:
+  # --- Qwen 2.5 family ---
+  - canonical_name: "qwen2.5-0.5b-q4km"
+    family: qwen
+    parameter_count_b: 0.5
+    context_length: 32768
+    quantization: Q4_K_M
+    estimated_ram_mb: 500
+    estimated_vram_mb: 500
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "qwen2.5:0.5b"
+
+  - canonical_name: "qwen2.5-7b-q4km"
+    family: qwen
+    parameter_count_b: 7.6
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 5500
+    estimated_vram_mb: 5500
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "qwen2.5:7b"
+      transformers: "Qwen/Qwen2.5-7B-Instruct"
+
+  - canonical_name: "qwen2.5-32b-q4km"
+    family: qwen
+    parameter_count_b: 32.8
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 20000
+    estimated_vram_mb: 20000
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "qwen2.5:32b"
+      transformers: "Qwen/Qwen2.5-32B-Instruct"
+
+  - canonical_name: "qwen2.5-72b-q4km"
+    family: qwen
+    parameter_count_b: 72.7
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 48000
+    estimated_vram_mb: 48000
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "qwen2.5:72b"
+      transformers: "Qwen/Qwen2.5-72B-Instruct"
+
+  - canonical_name: "qwen2.5-coder-32b-q8"
+    family: qwen
+    parameter_count_b: 32.8
+    context_length: 131072
+    quantization: Q8_0
+    estimated_ram_mb: 35000
+    estimated_vram_mb: 35000
+    tags: [code, instruct]
+    backend_ids:
+      ollama: "qwen2.5-coder:32b-instruct-q8_0"
+
+  # --- Llama 3 family ---
+  - canonical_name: "llama3.1-8b-q4km"
+    family: llama
+    parameter_count_b: 8.0
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 5500
+    estimated_vram_mb: 5500
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "llama3.1:8b"
+      transformers: "meta-llama/Llama-3.1-8B-Instruct"
+
+  - canonical_name: "llama3.3-70b-q4km"
+    family: llama
+    parameter_count_b: 70.6
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 43000
+    estimated_vram_mb: 43000
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "llama3.3:70b-instruct-q4_K_M"
+
+  # --- Mistral family ---
+  - canonical_name: "mistral-small3.2-24b-q4km"
+    family: mistral
+    parameter_count_b: 24.0
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 15500
+    estimated_vram_mb: 15500
+    tags: [chat, instruct]
+    backend_ids:
+      ollama: "mistral-small3.2:24b"
+
+  # --- DeepSeek family ---
+  - canonical_name: "deepseek-r1-32b-q4km"
+    family: deepseek
+    parameter_count_b: 32.8
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 20000
+    estimated_vram_mb: 20000
+    tags: [chat, reasoning]
+    backend_ids:
+      ollama: "deepseek-r1:32b"
+
+  - canonical_name: "deepseek-r1-70b-q4km"
+    family: deepseek
+    parameter_count_b: 70.6
+    context_length: 131072
+    quantization: Q4_K_M
+    estimated_ram_mb: 43000
+    estimated_vram_mb: 43000
+    tags: [chat, reasoning]
+    backend_ids:
+      ollama: "deepseek-r1:70b-llama-distill-q4_K_M"
+
+  - canonical_name: "deepseek-coder-v2-16b-q4"
+    family: deepseek
+    parameter_count_b: 15.7
+    context_length: 131072
+    quantization: Q4_0
+    estimated_ram_mb: 9000
+    estimated_vram_mb: 9000
+    tags: [code, instruct]
+    backend_ids:
+      ollama: "deepseek-coder-v2:16b"

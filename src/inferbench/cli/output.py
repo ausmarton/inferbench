@@ -141,6 +141,77 @@ def _print_system_info(profile: HardwareProfile) -> None:
     console.print(table)
 
 
+def print_backends(backends: list) -> None:
+    """Print backend availability table."""
+    from inferbench.backends.base import InferenceBackend
+
+    table = Table(title="Backends", title_style="bold cyan")
+    table.add_column("Backend", style="bold")
+    table.add_column("Status")
+    table.add_column("Version")
+    table.add_column("Install / Notes")
+
+    for b in backends:
+        if not isinstance(b, InferenceBackend):
+            continue
+
+        available = b.is_available()
+        status = Text("available", style="green") if available else Text("missing", style="red")
+        version = b.get_version() if available else "-"
+        hint = b.get_install_hint() or ""
+
+        table.add_row(b.display_name, status, version, hint)
+
+    console.print(table)
+
+
+def print_models(models: list, *, backend_filter: str | None = None) -> None:
+    """Print model catalog table."""
+    from inferbench.catalog.models import ModelSpec
+
+    table = Table(title="Models", title_style="bold cyan")
+    table.add_column("Model", style="bold")
+    table.add_column("Family")
+    table.add_column("Params", justify="right")
+    table.add_column("Quant")
+    table.add_column("Context", justify="right")
+    table.add_column("Est. RAM", justify="right")
+    table.add_column("Tags")
+    if not backend_filter:
+        table.add_column("Backends")
+
+    for m in models:
+        if not isinstance(m, ModelSpec):
+            continue
+
+        params_str = f"{m.parameter_count_b:.1f}B"
+        ctx_str = f"{m.context_length // 1024}K"
+        ram_str = f"{m.estimated_ram_mb / 1024:.1f} GB" if m.estimated_ram_mb else "-"
+        tags_str = ", ".join(m.tags) if m.tags else "-"
+
+        row = [
+            m.canonical_name,
+            m.family.value,
+            params_str,
+            m.quantization.value,
+            ctx_str,
+            ram_str,
+            tags_str,
+        ]
+
+        if not backend_filter:
+            backends_str = ", ".join(sorted(m.backend_ids.keys()))
+            row.append(backends_str)
+
+        table.add_row(*row)
+
+    if not models:
+        console.print("[yellow]No compatible models found.[/yellow]")
+    else:
+        console.print(table)
+        console.print(f"\n[dim]{len(models)} model(s)[/dim]")
+
+
 def _driver_label(driver: GpuDriver) -> str:
     """Human-readable driver name."""
     return {
