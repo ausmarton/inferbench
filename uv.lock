@@ -1557,6 +1557,7 @@ dependencies = [
 [package.optional-dependencies]
 all = [
     { name = "accelerate" },
+    { name = "huggingface-hub" },
     { name = "llama-cpp-python" },
     { name = "onnxruntime" },
     { name = "torch" },
@@ -1571,6 +1572,7 @@ dev = [
     { name = "ruff" },
 ]
 llamacpp = [
+    { name = "huggingface-hub" },
     { name = "llama-cpp-python" },
 ]
 onnx = [
@@ -1589,6 +1591,7 @@ vllm = [
 requires-dist = [
     { name = "accelerate", marker = "extra == 'transformers'", specifier = ">=0.30" },
     { name = "httpx", specifier = ">=0.27" },
+    { name = "huggingface-hub", marker = "extra == 'llamacpp'", specifier = ">=0.23" },
     { name = "inferbench", extras = ["llamacpp", "vllm", "transformers", "onnx"], marker = "extra == 'all'" },
     { name = "llama-cpp-python", marker = "extra == 'llamacpp'", specifier = ">=0.3" },
     { name = "onnxruntime", marker = "extra == 'onnx'", specifier = ">=1.18" },

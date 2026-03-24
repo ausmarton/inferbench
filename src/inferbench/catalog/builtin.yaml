@@ -10,6 +10,7 @@ models:
     tags: [chat, instruct]
     backend_ids:
       ollama: "qwen2.5:0.5b"
+      llamacpp: "Qwen/Qwen2.5-0.5B-Instruct-GGUF:qwen2.5-0.5b-instruct-q4_k_m.gguf"
 
   - canonical_name: "qwen2.5-7b-q4km"
     family: qwen
@@ -21,6 +22,7 @@ models:
     tags: [chat, instruct]
     backend_ids:
       ollama: "qwen2.5:7b"
+      llamacpp: "Qwen/Qwen2.5-7B-Instruct-GGUF:qwen2.5-7b-instruct-q4_k_m.gguf"
       transformers: "Qwen/Qwen2.5-7B-Instruct"
 
   - canonical_name: "qwen2.5-32b-q4km"
@@ -69,6 +71,7 @@ models:
     tags: [chat, instruct]
     backend_ids:
       ollama: "llama3.1:8b"
+      llamacpp: "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
       transformers: "meta-llama/Llama-3.1-8B-Instruct"
 
   - canonical_name: "llama3.3-70b-q4km"

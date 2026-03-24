@@ -19,7 +19,7 @@ dependencies = [
 
 [project.optional-dependencies]
 ollama = []
-llamacpp = ["llama-cpp-python>=0.3"]
+llamacpp = ["llama-cpp-python>=0.3", "huggingface-hub>=0.23"]
 vllm = ["vllm>=0.6"]
 transformers = [
     "transformers>=4.40",

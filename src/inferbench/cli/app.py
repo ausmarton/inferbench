@@ -298,3 +298,48 @@ def report(
         print_session_summary(session)
         if detailed:
             print_detailed_results(session)
+
+
+@app.command()
+def compare(
+    paths: Annotated[
+        list[str],
+        typer.Argument(help="Paths to result JSON files, or a single session file."),
+    ],
+    sort_by: Annotated[
+        str,
+        typer.Option("--sort", "-s", help="Sort by metric: tps, ttft, memory."),
+    ] = "tps",
+) -> None:
+    """Compare results across backends or sessions."""
+    from pathlib import Path
+
+    from inferbench.cli.output import console
+    from inferbench.results.report import print_result_comparison
+    from inferbench.results.storage import load_session
+
+    all_results = []
+    for p in paths:
+        file_path = Path(p)
+        if not file_path.exists():
+            console.print(f"[red]File not found: {p}[/red]")
+            raise typer.Exit(1)
+        session = load_session(file_path)
+        all_results.extend(session.results)
+
+    if not all_results:
+        console.print("[yellow]No results to compare.[/yellow]")
+        raise typer.Exit(1)
+
+    # Sort results
+    if sort_by == "tps":
+        all_results.sort(key=lambda r: r.avg_tps, reverse=True)
+    elif sort_by == "ttft":
+        all_results.sort(key=lambda r: r.avg_ttft_ms)
+    elif sort_by == "memory":
+        all_results.sort(key=lambda r: r.peak_ram_mb)
+
+    console.print()
+    console.rule("[bold]Backend Comparison[/bold]")
+    console.print()
+    print_result_comparison(all_results)
